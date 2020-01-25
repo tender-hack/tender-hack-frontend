@@ -1,35 +1,36 @@
 import React, { Component } from 'react'
 
 import {
-	Wrap,
-	Widget,
+  Wrap,
+  Widget,
 } from './styled';
 
-const arr = [
-	{
-		key: 1,
-		description: 'test1',
-	},
-	{
-		key: 2,
-		description: 'test2',
-	},
-	{
-		key: 3,
-		description: 'test3',
-	},
-];
+import { incrementWidget } from "../main/api/incrementWidget";
+import { withRouter } from "react-router-dom";
 
-export default class Widgets extends Component {
-	render() {
-		return (
-			<Wrap>
-				{arr.map(item => 
-					<Widget>
-						{item.description}
-					</Widget>
-				)}
-			</Wrap>
-		)
-	}
+
+class Widgets extends Component {
+
+  onSelect = (item) => {
+    incrementWidget(item.uid);
+
+    if (item.type === `NAVIGATION`) {
+      this.props.history.push(item.extraInfo.url)
+    }
+  };
+
+  render() {
+    const { widgets } = this.props;
+    return (
+      <Wrap>
+        {widgets.map(item =>
+          <Widget onClick={() => this.onSelect(item)}>
+            {item.name}
+          </Widget>
+        )}
+      </Wrap>
+    )
+  }
 }
+
+export default withRouter(Widgets);

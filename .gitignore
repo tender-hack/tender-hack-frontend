@@ -2,3 +2,10 @@
 /node_modules/
 build
 .vscode
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
