@@ -8,20 +8,35 @@ import {
 	Header,
 	WidgetsWrap,
 	Footer,
+	Title,
+	Left,
+	Right,
+	Button,
+	Icon,
 } from './styled';
 
 export default class MainPage extends Component {
 	render() {
-		console.log('est')
 		return (
 			<Wrap>
-				hi
-				<Header />
+				<Header>Header</Header>
 				<WidgetsWrap>
-					<Widgets />
-					<Chat />
+					<Left>
+						<Icon />
+						<Title>
+							Быстрые действия
+							<Button></Button>
+						</Title>
+						<Widgets />
+					</Left>
+					<Right>
+						<Title>
+							Голосовой помощник
+						</Title>
+						<Chat />
+					</Right>
 				</WidgetsWrap>
-				<Footer />
+				<Footer>Footer</Footer>
 			</Wrap>
 		)
 	}
