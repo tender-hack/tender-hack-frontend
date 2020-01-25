@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import Widgets from '../widgets/container';
 import Chat from '../chat/container';
 
+import { getWidgets } from './api/getWidgets';
+
 import {
 	Wrap,
 	Header,
@@ -16,6 +18,12 @@ import {
 } from './styled';
 
 export default class MainPage extends Component {
+	componentDidMount() {
+		getWidgets().then((data) => {
+			console.log(data);
+		})
+	}
+	
 	render() {
 		return (
 			<Wrap>
