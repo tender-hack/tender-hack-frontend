@@ -1,5 +1,5 @@
 export function incrementWidget(data) {
-  return fetch(`https://tender-hack-backend.herokuapp.com/api/v1/widgets/${data}/increment`, 
+  return fetch(`http://10.20.1.91:8080/api/v1/widgets/${data}/increment`, 
     {
       method: "POST"
     })

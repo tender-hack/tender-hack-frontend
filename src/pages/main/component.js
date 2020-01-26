@@ -6,6 +6,7 @@ import Popup from '../popup/component';
 
 import { getWidgets } from './api/getWidgets';
 import { getDefaultWidgets } from "./api/getDefaultWidgets";
+import { addWidget } from './api/addWidget';
 
 import {
   Wrap,
@@ -172,11 +173,13 @@ class MainPage extends Component {
           })}
         />
         <Header>
-				{window.location.pathname === '/unauthorized' ?
+				{window.location.pathname.includes('/unauthorized') ?
 					<a href='/'>
 						<img src={headerIcon(pathname)} alt=''/>
 					</a> :
-					<img src={headerIcon(pathname)} alt=''/>
+					<a href='/profile'>
+						<img src={headerIcon(pathname)} alt=''/>
+					</a>
 				}
         </Header>
         <WidgetsWrap>
@@ -207,8 +210,13 @@ class MainPage extends Component {
           </Right>
         </WidgetsWrap>
         <Footer>
-          <img src={bodyTopIcon(pathname)}/>
-          <img src={bodyMiddleIcon(pathname)}/>
+					{window.location.pathname === '/profile' ?
+						<a href='/contracts' onClick={() => {addWidget()}}>
+          		<img src={bodyTopIcon(pathname)} alt=''/>
+						</a> :
+          	<img src={bodyTopIcon(pathname)} alt=''/>
+					}
+          <img src={bodyMiddleIcon(pathname)} alt=''/>
         </Footer>
       </Wrap>
     )

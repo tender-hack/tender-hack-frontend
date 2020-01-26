@@ -1,5 +1,5 @@
 export function getWidgets() {
-  return fetch(`https://tender-hack-backend.herokuapp.com/api/v1/widgets`, {method: "GET"})
+  return fetch(`http://10.20.1.91:8080/api/v1/widgets`, {method: "GET"})
     .then(resp => resp.json())
     .then(data => {
 			console.log(data);

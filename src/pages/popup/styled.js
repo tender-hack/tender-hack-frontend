@@ -12,8 +12,8 @@ export const Background = styled.div`
 	position: absolute;
 	width: 100%;
 	height: 100vh;
-	background: #00189a;
-	opacity: 0.5;
+	background: #000e56;
+	opacity: 0.8;
 	font-size: 32px;
 	z-index: 10;
 `;
