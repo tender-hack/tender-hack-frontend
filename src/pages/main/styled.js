@@ -17,10 +17,18 @@ export const Header = styled.div`
 export const WidgetsWrap = styled.div`
 	display: flex;
 	justify-content: space-between;
-	padding: 20px 40px 0;
+	padding: 20px 40px 20px;
 `;
 
 export const Footer = styled.div`
+  overflow: hidden;
+  background: none;
+  border: none;
+  outline: none;
+  img {
+    margin-top: -5px;
+    width: 100%;
+  }
 `;
 
 export const Title = styled.div`

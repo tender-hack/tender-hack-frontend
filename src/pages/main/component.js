@@ -22,14 +22,59 @@ import {
 import { withRouter } from "react-router";
 
 import headerUnauthorizedIcon from './assets/header_unauthorized.png';
-import defaultHeaderIcon from './assets/header.png';
+import headerDefaultIcon from './assets/header.png';
+import bodyTopUnauthorizedIcon from './assets/body1_unauthorized.png';
+import bodyTopDefaultIcon from './assets/body1_main.png';
+import bodyMiddleUnauthorizedIcon from './assets/body2_unauthorized.png';
+import bodyDefaultMiddleIcon from './assets/body2_main.png';
+import bodyTopSupplierIcon from './assets/supplier1.png';
+import bodyMiddleSupplierIcon from './assets/supplier2.png';
+import bodyTopRegisterIcon from './assets/register.png';
+import bodyMiddleRegisterIcon from './assets/register_footer.png';
+import bodyTopCustomerIcon from './assets/customer.png';
+import bodyMiddleCustomerIcon from './assets/customer_footer.png';
+import bodyTopCPIcon from './assets/cp.png';
+import bodyMiddleCPIcon from './assets/cp_footer.png';
+
 
 const headerIcon = path => {
+  if (path.includes(`/unauthorized`)) {
+    return headerUnauthorizedIcon;
+  }
+  return headerDefaultIcon;
+};
+
+const bodyTopIcon = path => {
   switch (path) {
     case `/unauthorized`:
-      return headerUnauthorizedIcon;
+      return bodyTopUnauthorizedIcon;
+    case `/unauthorized/register`:
+      return bodyTopRegisterIcon;
+    case `/unauthorized/instruction/supplier`:
+      return bodyTopSupplierIcon;
+    case `/unauthorized/instruction/customer`:
+      return bodyTopCustomerIcon;
+    case `/unauthorized/ecp`:
+      return bodyTopCPIcon;
     default:
-      return defaultHeaderIcon;
+      return bodyTopDefaultIcon;
+  }
+};
+
+const bodyMiddleIcon = path => {
+  switch (path) {
+    case `/unauthorized`:
+      return bodyMiddleUnauthorizedIcon;
+    case `/unauthorized/register`:
+      return bodyMiddleRegisterIcon;
+    case `/unauthorized/instruction/supplier`:
+      return bodyMiddleSupplierIcon;
+    case `/unauthorized/instruction/customer`:
+      return bodyMiddleCustomerIcon;
+    case `/unauthorized/ecp`:
+      return bodyMiddleCPIcon;
+    default:
+      return bodyDefaultMiddleIcon;
   }
 };
 
@@ -56,7 +101,7 @@ class MainPage extends Component {
   componentDidMount() {
     const { pathname } = this.props.history.location;
 
-    if (pathname === `/unauthorized`) {
+    if (pathname.includes(`/unauthorized`)) {
       getDefaultWidgets().then((data) => {
         this.setState({ widgets: data });
       })
@@ -82,8 +127,9 @@ class MainPage extends Component {
 
   render() {
 		const {widgets, maxWidgetsNumber} = this.state;
-		console.log(this.state.dialog);
     const {pathname} = this.props.history.location;
+
+    console.log(this.state.dialog);
     return (
       <Wrap>
 				<Popup 
@@ -129,7 +175,10 @@ class MainPage extends Component {
 							})}/>
           </Right>
         </WidgetsWrap>
-        <Footer>Footer</Footer>
+        <Footer>
+          <img src={bodyTopIcon(pathname)}/>
+          <img src={bodyMiddleIcon(pathname)}/>
+        </Footer>
       </Wrap>
     )
   }
