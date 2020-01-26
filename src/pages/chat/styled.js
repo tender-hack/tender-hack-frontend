@@ -35,4 +35,17 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
+	width: 150px;
+	padding: 10px;
+	border-radius: 10px;
+	border: 2px solid #04ff00;
+	font-size: 14px;
+	font-weight: bold;
+	color: #04ff00;
+`;
+
+export const HiddenBlock = styled.div`
+	visibility: hidden;
+	width: 0;
+	height: 0;
 `;

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrap = styled.div`
+	position: relative;
 `;
 
 export const Header = styled.div`
@@ -18,7 +19,7 @@ export const Footer = styled.div`
 export const Title = styled.div`
 	font-size: 24px;
 	font-weight: bold;
-	margin-bottom: 15px;
+	margin-bottom: 20px;
 `;
 
 export const Left = styled.div`

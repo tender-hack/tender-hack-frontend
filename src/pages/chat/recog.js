@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import SpeechRecognition from "react-speech-recognition";
 
@@ -9,25 +9,48 @@ const propTypes = {
   browserSupportsSpeechRecognition: PropTypes.bool
 };
 
-const Dictaphone = ({
-  transcript,
-  resetTranscript,
-  browserSupportsSpeechRecognition
-}) => {
-  if (!browserSupportsSpeechRecognition) {
-    return null;
-  }
-	if (transcript.toLowerCase().includes('привет таня')) {
-		resetTranscript();
+class Dictaphone extends React.Component {
+	state = {
+		currentSpeech: '',
+	}
+
+	timer = null;
+
+	componentDidUpdate(prevProps, prevState) {
+		if (this.timer) {
+			clearTimeout(this.timer);
+		}
+		this.timer = setTimeout(() => console.log('timer'), 1000);
+		console.log(this.props.transcript);
 	}
 	
-  return (
-    <div>
-      <button onClick={resetTranscript}>Reset</button>
-      <span>{transcript}</span>
+	render() {
+		const {
+			transcript,
+			resetTranscript,
+			browserSupportsSpeechRecognition,
+			onStart,
+		} = this.props;
+		if (!browserSupportsSpeechRecognition) {
+			return null;
+		}
+		console.log(transcript);
+		if (transcript.toLowerCase().includes('привет')) {
+			resetTranscript();
+			console.log('привет');
+			onStart();
 
-    </div>
-  );
+			setTimeout(console.log('hi'), 1000);
+		}
+		
+		if (transcript.toLowerCase().includes('вопрос')) {
+			resetTranscript();
+			console.log('вопрос');
+		}
+
+
+		return null;
+	};
 };
 
 Dictaphone.propTypes = propTypes;

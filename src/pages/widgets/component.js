@@ -23,8 +23,8 @@ class Widgets extends Component {
     const { widgets } = this.props;
     return (
       <Wrap>
-        {widgets.map(item =>
-          <Widget onClick={() => this.onSelect(item)}>
+        {widgets && widgets.map(item =>
+          <Widget key={item.uid} onClick={() => this.onSelect(item)}>
             {item.name}
           </Widget>
         )}

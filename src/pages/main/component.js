@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import Widgets from '../widgets/container';
 import Chat from '../chat/container';
+import Popup from '../popup/component';
 
 import { getWidgets } from './api/getWidgets';
 
@@ -20,8 +21,32 @@ import {
 
 export default class MainPage extends Component {
   state = {
-    widgets: []
+		widgets: [],
+		showPopup: false,
+		dialog: [
+			{
+				role: "robot",
+				text: "Привет, я Таня",
+				diagram: [],
+			},
+			{
+				role: "human",
+				text: "Привет, помоги мне",
+				diagram: [],
+			},
+			{
+				role: "robot",
+				text: "Сори, я пока ничего не умею",
+				diagram: [],
+			},
+		],
   };
+
+	constructor() {
+		super();
+
+		this.openPopup = this.showPopup.bind(this);
+	}
 
   componentDidMount() {
     getWidgets().then((data) => {
@@ -29,10 +54,19 @@ export default class MainPage extends Component {
     })
   }
 
+	showPopup = () => {
+		this.setState({showPopup: true});
+	}
+
   render() {
     const { widgets } = this.state;
     return (
       <Wrap>
+				<Popup 
+					dialog={this.state.dialog}
+					show={this.state.showPopup}
+					closePopup={() => this.setState({showPopup: false})}
+				/>
         <Header>Header</Header>
         <WidgetsWrap>
           <Left>
@@ -47,7 +81,7 @@ export default class MainPage extends Component {
             <Title>
               Голосовой помощник
             </Title>
-            <Chat/>
+            <Chat openPopup={() => this.openPopup()}/>
           </Right>
         </WidgetsWrap>
         <Footer>Footer</Footer>
