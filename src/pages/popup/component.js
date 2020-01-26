@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Chart from 'chart.js';
 
 import { sendText } from '../api/sendText';
 
@@ -9,16 +10,43 @@ import {
 	DialogWrap,
 	HumanText,
 	RobotText,
+	RobotChart,
 	Buttons,
 	Button,
 	InputWrap,
 	Input,
+	Canvas,
 } from './styled';
 
 export default class Popup extends Component {
 	state = {
 		currentInput: '',
 	}
+	chartRef = React.createRef();
+
+	componentDidUpdate() {
+		if (this.props.dialog && this.props.dialog.some(item => !!item.chartInfo)) {
+			const myChartRef = this.chartRef.current.getContext("2d");
+			const item = this.props.dialog.find(item => !!item.chartInfo);
+console.log(item);
+			new Chart(myChartRef, {
+				type: "doughnut",
+				data: {
+					//Bring in data
+					labels: item.chartInfo.map(item => item.legend),
+					datasets: [
+						{
+							data: item.chartInfo.map(item => item.percent),
+						}
+					],
+				},
+				options: {
+					//Customize chart options
+				}
+			});
+		}
+	}
+	
 
 	render() {
 		console.log(this.props.dialog);
@@ -32,7 +60,14 @@ export default class Popup extends Component {
 								{this.props.dialog && this.props.dialog.map((item, index) => 
 									item.role === "human" ? 
 										<HumanText key={index}>{item.text}</HumanText> :
-										<RobotText key={index}>{item.text}</RobotText>
+										<div key={index}>
+											<RobotText>{item.text}</RobotText>
+											{item.chartInfo &&
+												<RobotChart key={index}>
+													<Canvas id={index} ref={this.chartRef} width="200" height="200"></Canvas>
+												</RobotChart>
+											}
+										</div>
 								)}
 							</DialogWrap>
 							<InputWrap>
@@ -43,7 +78,7 @@ export default class Popup extends Component {
 										if (e.keyCode === 13) {
 											this.props.addToDialog({role: 'human', text: this.state.currentInput});
 											sendText(this.state.currentInput).then((res) => {
-												this.props.addToDialog({role: 'robot', text: res.text});
+												this.props.addToDialog({role: 'robot', ...res});
 											});
 											this.setState({currentInput: ''});
 										}

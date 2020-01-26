@@ -73,4 +73,14 @@ export const Input = styled.input`
 	margin: 0 auto 50px;
 	text-align: right;
 	font-size: 24px;
+	border-radius: 10px;
+	border: none;
+`;
+
+export const RobotChart = styled.div`
+`;
+
+export const Canvas = styled.canvas`
+	width: 200px !important;
+	height: 200px !important;
 `;
