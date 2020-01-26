@@ -13,6 +13,7 @@ import {
 
 export default class Popup extends Component {
 	render() {
+		console.log(this.props.dialog);
 		return (
 			this.props.show ?
 				<div>

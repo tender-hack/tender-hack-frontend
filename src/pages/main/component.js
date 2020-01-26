@@ -59,7 +59,8 @@ export default class MainPage extends Component {
 	}
 
   render() {
-    const { widgets } = this.state;
+		const { widgets } = this.state;
+		console.log(this.state.dialog);
     return (
       <Wrap>
 				<Popup 
@@ -81,7 +82,13 @@ export default class MainPage extends Component {
             <Title>
               Голосовой помощник
             </Title>
-            <Chat openPopup={() => this.openPopup()}/>
+						<Chat 
+							openPopup={() => this.openPopup()}
+							addToDialog={(el) => this.setState((state) => {
+								const dialog = state.dialog;
+								dialog.push(el);
+								return { dialog };
+							})}/>
           </Right>
         </WidgetsWrap>
         <Footer>Footer</Footer>

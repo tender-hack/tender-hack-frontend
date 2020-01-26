@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Speech from 'react-speech';
 import Recogn from './recog';
 
+import { sendText } from '../api/sendText';
+
 import {
 	Wrap,
 	Icon,
@@ -44,13 +46,20 @@ export default class Chat extends Component {
 							value={this.state.currentInput}
 							onChange={(e) => this.setState({currentInput: e.target.value})}
 						/>
-						<Button onClick={this.props.openPopup}>Задать вопрос</Button>
+						<Button onClick={() => {
+							this.props.openPopup();
+							console.log(this.state.currentInput);
+							sendText(this.state.currentInput).then((res) => {
+								console.log(res)
+								this.props.addToDialog({role: 'human', text: res.text})
+							});
+						}}>Задать вопрос</Button>
 					</div>
 				</TextBlock>
 
 				<HiddenBlock>
 					<Speech lang='ru-Latn' text={this.state.currentSpeech}/>
-					<Recogn onStart={this.props.openPopup}/>
+					<Recogn onStart={this.props.openPopup} addToDialog={this.props.addToDialog} />
 				</HiddenBlock>
 			</Wrap>
 		)
