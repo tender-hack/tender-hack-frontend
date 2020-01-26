@@ -60,14 +60,22 @@ class Widgets extends Component {
 
   render() {
     const { widgets, maxItems } = this.props;
-    const { pathname } = this.props.history.location;
-
-    if (pathname !== `/` && !pathname.includes('/unauthorized')) {
-      widgets.unshift(mainBackWidget);
-    }
+    const { pathname } = window.location;
 
     return (
       <Wrap>
+				{pathname !== `/` && !pathname.includes('/unauthorized') &&
+					<Widget onClick={() => this.onSelect(mainBackWidget)}>
+						<WidgetFlexContainer>
+							<WidgetImageContainer>
+								<img src={widgetIcon(mainBackWidget.subType)} alt={mainBackWidget.name}/>
+							</WidgetImageContainer>
+							<WidgetNameContainer>
+								{mainBackWidget.name}
+							</WidgetNameContainer>
+						</WidgetFlexContainer>
+					</Widget>
+				}
         {widgets && widgets.slice(0, maxItems).map(item =>
           <Widget key={item.uid} onClick={() => this.onSelect(item)}>
             <WidgetFlexContainer>

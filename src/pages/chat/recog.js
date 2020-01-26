@@ -65,7 +65,16 @@ class Dictaphone extends React.Component {
 			this.shouldSendRequest = true;
 		}
 
-		if (transcript.toLowerCase().includes('спасибо всё') || transcript.toLowerCase().includes('всё спасибо')) {
+		if (transcript.toLowerCase().includes('спасибо всё') || 
+		transcript.toLowerCase().includes('всё отбой') || 
+		transcript.toLowerCase().includes('всё хорош') || 
+		transcript.toLowerCase().includes('закрыть диалог') || 
+		transcript.toLowerCase().includes('давай пока') || 
+		transcript.toLowerCase().includes('пока давай') || 
+		transcript.toLowerCase().includes('всё закончили') || 
+		transcript.toLowerCase().includes('всё не надо') || 
+		transcript.toLowerCase().includes('всё давай пока') || 
+		transcript.toLowerCase().includes('всё спасибо')) {
 			resetTranscript();
 			this.shouldSendRequest = false;
 			this.props.closeSession();
