@@ -3,11 +3,14 @@ import styled from 'styled-components';
 export const Wrap = styled.div`
 	display: flex;
 	margin-left: -15px;
+	max-width: 640px;
+	overflow-x: scroll;
 `;
 
 export const Widget = styled.div`
 	margin: 0 8px 30px;
 	width: 120px;
+	min-width: 120px;
 	height: 150px;
 	border-radius: 15px;
 	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
