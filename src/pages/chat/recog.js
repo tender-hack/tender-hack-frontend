@@ -49,7 +49,12 @@ class Dictaphone extends React.Component {
 			return null;
 		}
 		console.log(transcript);
-		if (transcript.toLowerCase().includes('привет')) {
+		if (transcript.toLowerCase().includes('привет таня') || 
+			transcript.toLowerCase().includes('привет аня')|| 
+			transcript.toLowerCase().includes('привет ань')|| 
+			transcript.toLowerCase().includes('привет тань')|| 
+			transcript.toLowerCase().includes('тань привет')|| 
+			transcript.toLowerCase().includes('таня привет')) {
 			resetTranscript();
 			onStart();
 			this.shouldSendRequest = true;
@@ -60,6 +65,11 @@ class Dictaphone extends React.Component {
 			this.shouldSendRequest = true;
 		}
 
+		if (transcript.toLowerCase().includes('спасибо всё') || transcript.toLowerCase().includes('всё спасибо')) {
+			resetTranscript();
+			this.shouldSendRequest = false;
+			this.props.closeSession();
+		}
 
 		return null;
 	};

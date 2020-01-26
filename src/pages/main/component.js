@@ -25,22 +25,12 @@ class MainPage extends Component {
   state = {
 		widgets: [],
 		showPopup: false,
-    maxWidgetsNumber: 10,
+		maxWidgetsNumber: 10,
+		currentSpeech: '',
 		dialog: [
 			{
 				role: "robot",
 				text: "Привет, я Таня",
-				diagram: [],
-			},
-			{
-				role: "human",
-				text: "Привет, помоги мне",
-				diagram: [],
-			},
-			{
-				role: "robot",
-				text: "Сори, я пока ничего не умею",
-				diagram: [],
 			},
 		],
   };
@@ -67,9 +57,18 @@ class MainPage extends Component {
 		this.setState({showPopup: true});
 	}
 
+	closeSession = () => {
+		this.setState({showPopup: false, dialog: [
+			{
+				role: "robot",
+				text: "Привет, я Таня",
+			},
+		]});
+	}
+
   render() {
 		const {widgets, maxWidgetsNumber} = this.state;
-		console.log(this.state.dialog);
+		console.log(this.state.dialog, this.state.currentSpeech);
     return (
       <Wrap>
 				<Popup 
@@ -79,6 +78,9 @@ class MainPage extends Component {
 					addToDialog={(el) => this.setState((state) => {
 						const dialog = state.dialog;
 						dialog.push(el);
+						if (el.role === 'robot') {
+							this.setState({currentSpeech: el.text})
+						}
 						return { dialog };
 					})}
 				/>
@@ -98,9 +100,14 @@ class MainPage extends Component {
             </Title>
 						<Chat
 							openPopup={() => this.openPopup()}
+							closeSession={this.closeSession}
+							currentSpeech={this.state.currentSpeech}
 							addToDialog={(el) => this.setState((state) => {
 								const dialog = state.dialog;
 								dialog.push(el);
+								if (el.role === 'robot') {
+									this.setState({currentSpeech: el.text})
+								}
 								return { dialog };
 							})}/>
           </Right>

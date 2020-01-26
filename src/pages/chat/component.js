@@ -23,14 +23,15 @@ const arr = [
 
 export default class Chat extends Component {
 	state = {
-		currentSpeech: 'test',
 		showPopup: false,
 		currentInput: '',
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		const node = document.getElementsByClassName('rs-play')[0];
-		if (node && prevState.currentSpeech !== this.state.currentSpeech) {
+		console.log(this.props.currentSpeech);
+		if (node && prevProps.currentSpeech !== this.props.currentSpeech) {
+			console.log('object');
 			node.click();
 		};
 	}
@@ -66,8 +67,8 @@ export default class Chat extends Component {
 				</TextBlock>
 
 				<HiddenBlock>
-					<Speech lang='ru-Latn' text={this.state.currentSpeech}/>
-					<Recogn onStart={this.props.openPopup} addToDialog={this.props.addToDialog} />
+					<Speech lang='ru-Latn' text={this.props.currentSpeech || ''}/>
+					<Recogn onStart={this.props.openPopup} addToDialog={this.props.addToDialog} closeSession={this.props.closeSession}/>
 				</HiddenBlock>
 			</Wrap>
 		)

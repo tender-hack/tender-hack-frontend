@@ -25,18 +25,28 @@ export default class Popup extends Component {
 	chartRef = React.createRef();
 
 	componentDidUpdate() {
+		const node = document.getElementById("block");
+		if (node)
+			node.scrollTop = 9999;
 		if (this.props.dialog && this.props.dialog.some(item => !!item.chartInfo)) {
 			const myChartRef = this.chartRef.current.getContext("2d");
 			const item = this.props.dialog.find(item => !!item.chartInfo);
 console.log(item);
 			new Chart(myChartRef, {
-				type: "doughnut",
+				type: "pie",
 				data: {
 					//Bring in data
 					labels: item.chartInfo.map(item => item.legend),
 					datasets: [
 						{
-							data: item.chartInfo.map(item => item.percent),
+							data: item.chartInfo.map(item => {return item.percent}),
+							backgroundColor: [
+                "#FF6384",
+                "#63FF84",
+                "#8463FF",
+                "#84FF63",
+                "#6384FF"
+            ]
 						}
 					],
 				},
@@ -56,7 +66,7 @@ console.log(item);
 					<Background />
 					<Wrap>
 						<Chat>
-							<DialogWrap>
+							<DialogWrap id='block'>
 								{this.props.dialog && this.props.dialog.map((item, index) => 
 									item.role === "human" ? 
 										<HumanText key={index}>{item.text}</HumanText> :

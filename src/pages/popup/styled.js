@@ -81,6 +81,7 @@ export const RobotChart = styled.div`
 `;
 
 export const Canvas = styled.canvas`
-	width: 200px !important;
-	height: 200px !important;
+	margin: 0 auto;
+	width: 400px !important;
+	height: 400px !important;
 `;
