@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Wrap = styled.div`
 	display: flex;
+	padding-top: 10px;
 	margin-left: -15px;
 	max-width: 640px;
 	overflow-x: scroll;

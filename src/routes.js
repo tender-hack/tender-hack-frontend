@@ -15,7 +15,8 @@ export default class MenuView extends Component {
     return (
       <Switch>
         <Route exact path="/" component={Main} />
-        {/* {window.location.path !== "/auth" && 
+        <Route exact path="/unauthorized" component={Main} />
+        {/* {window.location.path !== "/auth" &&
           <Wrapper history={this.props.history}>
             <Route path="/search" component={Search} />
             <Route path="/history" component={History} />
