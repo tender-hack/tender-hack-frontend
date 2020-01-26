@@ -57,11 +57,13 @@ export default class Chat extends Component {
 							}}
 						/>
 						<Button onClick={() => {
-							this.props.openPopup();
-							this.props.addToDialog({role: 'human', text: this.state.currentInput});
-							sendText(this.state.currentInput).then((res) => {
-								this.props.addToDialog({role: 'robot', ...res});
-							});
+							if (this.state.currentInput) {
+								this.props.openPopup();
+								this.props.addToDialog({role: 'human', text: this.state.currentInput});
+								sendText(this.state.currentInput).then((res) => {
+									this.props.addToDialog({role: 'robot', ...res});
+								})
+							};
 						}}>Задать вопрос</Button>
 					</div>
 				</TextBlock>

@@ -46,6 +46,7 @@ export const Button = styled.button`
 	font-size: 14px;
 	font-weight: bold;
 	color: #04ff00;
+	cursor: pointer;
 `;
 
 export const HiddenBlock = styled.div`
