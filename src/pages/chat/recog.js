@@ -60,7 +60,7 @@ class Dictaphone extends React.Component {
 			this.shouldSendRequest = true;
 		}
 		
-		if (transcript.toLowerCase().includes('вопрос')) {
+		if (transcript.toLowerCase().includes('таня скажи')) {
 			resetTranscript();
 			this.shouldSendRequest = true;
 		}
@@ -68,6 +68,8 @@ class Dictaphone extends React.Component {
 		if (transcript.toLowerCase().includes('спасибо всё') || 
 		transcript.toLowerCase().includes('всё отбой') || 
 		transcript.toLowerCase().includes('всё хорош') || 
+		transcript.toLowerCase().includes('всё пока') || 
+		transcript.toLowerCase().includes('спасибо пока') || 
 		transcript.toLowerCase().includes('закрыть диалог') || 
 		transcript.toLowerCase().includes('давай пока') || 
 		transcript.toLowerCase().includes('пока давай') || 

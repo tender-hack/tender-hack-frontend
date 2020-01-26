@@ -138,7 +138,12 @@ class MainPage extends Component {
   }
 
   showPopup = () => {
-    this.setState({ showPopup: true });
+    this.setState({ showPopup: true, dialog: [
+			{
+				role: "robot",
+				text: "Привет, я Таня",
+			},
+		] });
   }
 
   closeSession = () => {
@@ -167,7 +172,12 @@ class MainPage extends Component {
             const dialog = state.dialog;
             dialog.push(el);
             if (el.role === 'robot') {
-              this.setState({ currentSpeech: el.text })
+							this.setState({ currentSpeech: el.text })
+							
+							if (el.url) {
+								this.props.history.push(el.url);
+								this.closeSession();
+							}
             }
             return { dialog };
           })}
@@ -203,7 +213,12 @@ class MainPage extends Component {
                 const dialog = state.dialog;
                 dialog.push(el);
                 if (el.role === 'robot') {
-                  this.setState({ currentSpeech: el.text })
+									this.setState({ currentSpeech: el.text })
+									
+									if (el.url) {
+										this.props.history.push(el.url);
+										this.closeSession();
+									}
                 }
                 return { dialog };
               })}/>

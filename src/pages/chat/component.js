@@ -31,7 +31,7 @@ export default class Chat extends Component {
 		const node = document.getElementsByClassName('rs-play')[0];
 		console.log(this.props.currentSpeech);
 		if (node && prevProps.currentSpeech !== this.props.currentSpeech) {
-			console.log('object');
+			console.log('currentSpeech:  ', this.props.currentSpeech, node);
 			node.click();
 		};
 	}
@@ -69,7 +69,7 @@ export default class Chat extends Component {
 				</TextBlock>
 
 				<HiddenBlock>
-					<Speech lang='ru-Latn' text={this.props.currentSpeech || ''}/>
+					{this.props.currentSpeech && <Speech lang='ru-Latn' text={this.props.currentSpeech || ''}/>}
 					<Recogn onStart={this.props.openPopup} addToDialog={this.props.addToDialog} closeSession={this.props.closeSession}/>
 				</HiddenBlock>
 			</Wrap>
