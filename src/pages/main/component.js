@@ -5,6 +5,7 @@ import Chat from '../chat/container';
 import Popup from '../popup/component';
 
 import { getWidgets } from './api/getWidgets';
+import { getDefaultWidgets } from "./api/getDefaultWidgets";
 
 import {
   Wrap,
@@ -18,11 +19,13 @@ import {
   Icon,
 } from './styled';
 
+import { withRouter } from "react-router";
 
-export default class MainPage extends Component {
+class MainPage extends Component {
   state = {
 		widgets: [],
 		showPopup: false,
+    maxWidgetsNumber: 10,
 		dialog: [
 			{
 				role: "robot",
@@ -49,9 +52,15 @@ export default class MainPage extends Component {
 	}
 
   componentDidMount() {
-    getWidgets().then((data) => {
-      this.setState({ widgets: data });
-    })
+    if (this.props.history.location === `/unauthorized`) {
+      getDefaultWidgets().then((data) => {
+        this.setState({ widgets: data });
+      })
+    } else {
+      getWidgets().then((data) => {
+        this.setState({ widgets: data });
+      })
+    }
   }
 
 	showPopup = () => {
@@ -59,7 +68,7 @@ export default class MainPage extends Component {
 	}
 
   render() {
-		const { widgets } = this.state;
+		const {widgets, maxWidgetsNumber} = this.state;
 		console.log(this.state.dialog);
     return (
       <Wrap>
@@ -81,13 +90,13 @@ export default class MainPage extends Component {
               Быстрые действия
               <Button></Button>
             </Title>
-            <Widgets widgets={widgets}/>
+            <Widgets widgets={widgets} maxItems={maxWidgetsNumber}/>
           </Left>
           <Right>
             <Title>
               Голосовой помощник
             </Title>
-						<Chat 
+						<Chat
 							openPopup={() => this.openPopup()}
 							addToDialog={(el) => this.setState((state) => {
 								const dialog = state.dialog;
@@ -101,3 +110,5 @@ export default class MainPage extends Component {
     )
   }
 }
+
+export default withRouter(MainPage);
