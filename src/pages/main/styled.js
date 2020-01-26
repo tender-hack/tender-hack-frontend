@@ -5,6 +5,13 @@ export const Wrap = styled.div`
 `;
 
 export const Header = styled.div`
+  overflow: hidden;
+  background: none;
+  border: none;
+  outline: none;
+  img {
+    width: 100%;
+  }
 `;
 
 export const WidgetsWrap = styled.div`

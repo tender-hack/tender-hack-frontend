@@ -21,6 +21,18 @@ import {
 
 import { withRouter } from "react-router";
 
+import headerUnauthorizedIcon from './assets/header_unauthorized.png';
+import defaultHeaderIcon from './assets/header.png';
+
+const headerIcon = path => {
+  switch (path) {
+    case `/unauthorized`:
+      return headerUnauthorizedIcon;
+    default:
+      return defaultHeaderIcon;
+  }
+};
+
 class MainPage extends Component {
   state = {
 		widgets: [],
@@ -42,7 +54,9 @@ class MainPage extends Component {
 	}
 
   componentDidMount() {
-    if (this.props.history.location === `/unauthorized`) {
+    const { pathname } = this.props.history.location;
+
+    if (pathname === `/unauthorized`) {
       getDefaultWidgets().then((data) => {
         this.setState({ widgets: data });
       })
@@ -68,7 +82,8 @@ class MainPage extends Component {
 
   render() {
 		const {widgets, maxWidgetsNumber} = this.state;
-		console.log(this.state.dialog, this.state.currentSpeech);
+		console.log(this.state.dialog);
+    const {pathname} = this.props.history.location;
     return (
       <Wrap>
 				<Popup 
@@ -84,7 +99,9 @@ class MainPage extends Component {
 						return { dialog };
 					})}
 				/>
-        <Header>Header</Header>
+        <Header>
+          <img src={headerIcon(pathname)}/>
+        </Header>
         <WidgetsWrap>
           <Left>
             <Icon/>
