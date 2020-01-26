@@ -26,6 +26,8 @@ export const Left = styled.div`
 `;
 
 export const Right = styled.div`
+	flex: 0 0 auto;
+	width: 700px;
 `;
 
 export const Button = styled.div`

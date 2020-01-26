@@ -45,13 +45,21 @@ export default class Chat extends Component {
 						<Input 
 							value={this.state.currentInput}
 							onChange={(e) => this.setState({currentInput: e.target.value})}
+							onKeyDown={(e) => {
+								if (e.keyCode === 13) {
+									this.props.openPopup();
+									this.props.addToDialog({role: 'human', text: this.state.currentInput});
+									sendText(this.state.currentInput).then((res) => {
+										this.props.addToDialog({role: 'robot', text: res.text});
+									});
+								}
+							}}
 						/>
 						<Button onClick={() => {
 							this.props.openPopup();
-							console.log(this.state.currentInput);
+							this.props.addToDialog({role: 'human', text: this.state.currentInput});
 							sendText(this.state.currentInput).then((res) => {
-								console.log(res)
-								this.props.addToDialog({role: 'human', text: res.text})
+								this.props.addToDialog({role: 'robot', text: res.text});
 							});
 						}}>Задать вопрос</Button>
 					</div>

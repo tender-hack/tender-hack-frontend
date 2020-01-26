@@ -1,15 +1,19 @@
 import styled from 'styled-components';
 
+import woman from './assets/chat_woman.png';
+
 export const Wrap = styled.div`
 	display: flex;
 `;
 
 export const Icon = styled.div`
-	width: 200px;
-	height: 200px;
+	width: 170px;
+	height: 170px;
 	background-color: black;
 	margin-right: 20px;
 	border-radius: 50%;
+	background: url(${woman});
+	background-repeat: no-repeat;
 `;
 
 export const TextBlock = styled.div`

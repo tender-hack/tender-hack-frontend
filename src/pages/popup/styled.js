@@ -62,3 +62,15 @@ export const Button = styled.div`
 	padding: 10px 20px;
 	border-radius: 30px;
 `;
+
+export const InputWrap = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
+export const Input = styled.input`
+	width: 700px;
+	margin: 0 auto 50px;
+	text-align: right;
+	font-size: 24px;
+`;

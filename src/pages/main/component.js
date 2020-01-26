@@ -67,6 +67,11 @@ export default class MainPage extends Component {
 					dialog={this.state.dialog}
 					show={this.state.showPopup}
 					closePopup={() => this.setState({showPopup: false})}
+					addToDialog={(el) => this.setState((state) => {
+						const dialog = state.dialog;
+						dialog.push(el);
+						return { dialog };
+					})}
 				/>
         <Header>Header</Header>
         <WidgetsWrap>

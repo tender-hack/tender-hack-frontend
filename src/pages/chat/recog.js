@@ -21,22 +21,23 @@ class Dictaphone extends React.Component {
 	componentDidUpdate(prevProps, prevState) {
 		if (!!this.props.transcript && prevProps.transcript === this.props.transcript && this.shouldSendRequest) {
 			this.timer = setTimeout(() => {
+
+				this.props.addToDialog({role: 'human', text: this.props.transcript})
+				
 				sendText(this.props.transcript).then((res) => {
-					console.log(res);
 					this.shouldSendRequest = false;
-					this.props.addToDialog({role: 'human', text: this.props.transcript})
 					this.props.addToDialog({role: 'robot', text: res.text})
 				});
+
+				this.props.resetTranscript();
 			}, 2000);
-			console.log("same");
-		} else if (this.timer) {
+		} else 
+		if (this.timer) {
 			clearTimeout(this.timer);
 		}
-		console.log(this.props.transcript);
 	}
 	
-	render() { 
-		console.log('shouldSendRequest ', this.shouldSendRequest);
+	render() {
 		const {
 			transcript,
 			resetTranscript,
@@ -49,14 +50,12 @@ class Dictaphone extends React.Component {
 		console.log(transcript);
 		if (transcript.toLowerCase().includes('привет')) {
 			resetTranscript();
-			console.log('привет таня');
 			onStart();
 			this.shouldSendRequest = true;
 		}
 		
 		if (transcript.toLowerCase().includes('вопрос')) {
 			resetTranscript();
-			console.log('вопрос');
 			this.shouldSendRequest = true;
 		}
 
