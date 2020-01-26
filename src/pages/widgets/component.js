@@ -62,7 +62,7 @@ class Widgets extends Component {
     const { widgets, maxItems } = this.props;
     const { pathname } = this.props.history.location;
 
-    if (pathname !== `/` && pathname !== '/unauthorized') {
+    if (pathname !== `/` && !pathname.includes('/unauthorized')) {
       widgets.unshift(mainBackWidget);
     }
 
