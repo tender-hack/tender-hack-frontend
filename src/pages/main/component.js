@@ -146,7 +146,12 @@ class MainPage extends Component {
 					})}
 				/>
         <Header>
-          <img src={headerIcon(pathname)}/>
+				{window.location.pathname === '/unauthorized' ?
+					<a href='/'>
+						<img src={headerIcon(pathname)} alt=''/>
+					</a> :
+					<img src={headerIcon(pathname)} alt=''/>
+				}
         </Header>
         <WidgetsWrap>
           <Left>

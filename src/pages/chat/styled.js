@@ -21,11 +21,11 @@ export const TextBlock = styled.div`
 `;
 
 export const Text = styled.div`
-	padding: 10px 20px;
+	padding: 5px 15px;
 	background-color: #03a2efbf;
 	border-radius: 10px;
 	width: fit-content;
-	margin: 10px 0;
+	margin: 7px 0;
 	color: white;
 	max-width: 410px;
 `;
