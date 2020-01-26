@@ -35,6 +35,14 @@ import bodyTopCustomerIcon from './assets/customer.png';
 import bodyMiddleCustomerIcon from './assets/customer_footer.png';
 import bodyTopCPIcon from './assets/cp.png';
 import bodyMiddleCPIcon from './assets/cp_footer.png';
+import bodyTopOfferIcon from './assets/offer_top.png';
+import bodyMiddleOfferIcon from './assets/offer_bottom.png';
+import bodyTopContractsIcon from './assets/contracts_top.png';
+import bodyMiddleContractsIcon from './assets/contracts_bottom.png';
+import bodyTopQuotesIcon from './assets/quotes_top.png';
+import bodyMiddleQuotesIcon from './assets/quotes_middle.png';
+import bodyTopProfileIcon from './assets/profile_top.png';
+import bodyMiddleProfileIcon from './assets/profile_bottom.png';
 
 
 const headerIcon = path => {
@@ -56,6 +64,14 @@ const bodyTopIcon = path => {
       return bodyTopCustomerIcon;
     case `/unauthorized/ecp`:
       return bodyTopCPIcon;
+    case `/offers`:
+      return bodyTopOfferIcon;
+    case `/contracts`:
+      return bodyTopContractsIcon;
+    case `/quotes`:
+      return bodyTopQuotesIcon;
+    case `/profile`:
+      return bodyTopProfileIcon;
     default:
       return bodyTopDefaultIcon;
   }
@@ -73,6 +89,14 @@ const bodyMiddleIcon = path => {
       return bodyMiddleCustomerIcon;
     case `/unauthorized/ecp`:
       return bodyMiddleCPIcon;
+    case `/offers`:
+      return bodyMiddleOfferIcon;
+    case `/contracts`:
+      return bodyMiddleContractsIcon;
+    case `/quotes`:
+      return bodyMiddleQuotesIcon;
+    case `/profile`:
+      return bodyMiddleProfileIcon;
     default:
       return bodyDefaultMiddleIcon;
   }
@@ -80,23 +104,23 @@ const bodyMiddleIcon = path => {
 
 class MainPage extends Component {
   state = {
-		widgets: [],
-		showPopup: false,
-		maxWidgetsNumber: 10,
-		currentSpeech: '',
-		dialog: [
-			{
-				role: "robot",
-				text: "Привет, я Таня",
-			},
-		],
+    widgets: [],
+    showPopup: false,
+    maxWidgetsNumber: 10,
+    currentSpeech: '',
+    dialog: [
+      {
+        role: "robot",
+        text: "Привет, я Таня",
+      },
+    ],
   };
 
-	constructor() {
-		super();
+  constructor() {
+    super();
 
-		this.openPopup = this.showPopup.bind(this);
-	}
+    this.openPopup = this.showPopup.bind(this);
+  }
 
   componentDidMount() {
     const { pathname } = this.props.history.location;
@@ -112,39 +136,41 @@ class MainPage extends Component {
     }
   }
 
-	showPopup = () => {
-		this.setState({showPopup: true});
-	}
+  showPopup = () => {
+    this.setState({ showPopup: true });
+  }
 
-	closeSession = () => {
-		this.setState({showPopup: false, dialog: [
-			{
-				role: "robot",
-				text: "Привет, я Таня",
-			},
-		]});
-	}
+  closeSession = () => {
+    this.setState({
+      showPopup: false, dialog: [
+        {
+          role: "robot",
+          text: "Привет, я Таня",
+        },
+      ]
+    });
+  }
 
   render() {
-		const {widgets, maxWidgetsNumber} = this.state;
-    const {pathname} = this.props.history.location;
+    const { widgets, maxWidgetsNumber } = this.state;
+    const { pathname } = this.props.history.location;
 
     console.log(this.state.dialog);
     return (
       <Wrap>
-				<Popup 
-					dialog={this.state.dialog}
-					show={this.state.showPopup}
-					closePopup={() => this.setState({showPopup: false})}
-					addToDialog={(el) => this.setState((state) => {
-						const dialog = state.dialog;
-						dialog.push(el);
-						if (el.role === 'robot') {
-							this.setState({currentSpeech: el.text})
-						}
-						return { dialog };
-					})}
-				/>
+        <Popup
+          dialog={this.state.dialog}
+          show={this.state.showPopup}
+          closePopup={() => this.setState({ showPopup: false })}
+          addToDialog={(el) => this.setState((state) => {
+            const dialog = state.dialog;
+            dialog.push(el);
+            if (el.role === 'robot') {
+              this.setState({ currentSpeech: el.text })
+            }
+            return { dialog };
+          })}
+        />
         <Header>
 				{window.location.pathname === '/unauthorized' ?
 					<a href='/'>
@@ -166,18 +192,18 @@ class MainPage extends Component {
             <Title>
               Голосовой помощник
             </Title>
-						<Chat
-							openPopup={() => this.openPopup()}
-							closeSession={this.closeSession}
-							currentSpeech={this.state.currentSpeech}
-							addToDialog={(el) => this.setState((state) => {
-								const dialog = state.dialog;
-								dialog.push(el);
-								if (el.role === 'robot') {
-									this.setState({currentSpeech: el.text})
-								}
-								return { dialog };
-							})}/>
+            <Chat
+              openPopup={() => this.openPopup()}
+              closeSession={this.closeSession}
+              currentSpeech={this.state.currentSpeech}
+              addToDialog={(el) => this.setState((state) => {
+                const dialog = state.dialog;
+                dialog.push(el);
+                if (el.role === 'robot') {
+                  this.setState({ currentSpeech: el.text })
+                }
+                return { dialog };
+              })}/>
           </Right>
         </WidgetsWrap>
         <Footer>
